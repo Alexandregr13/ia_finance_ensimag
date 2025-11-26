@@ -1,0 +1,32 @@
+{
+  "InputSize" : 2,
+  "BatchSize" : 3,
+  "Initializer" : "Xavier",
+  "Layers" : [ {
+    "Size" : 2,
+    "ActivatorType" : "LeakyRelu",
+    "Type" : "Standard",
+    "GradientAdjustmentParameters" : {
+      "Type" : "FixedLearningRate",
+      "LearningRate" : 0.1
+      }
+    // "GradientAdjustmentParameters" : {
+    //   "Type" : "Momentum",
+    //   "LearningRate" : 0.01,
+    //  "Momentum" : 0.01
+    //   }
+    }, {
+    "Size" : 1,
+    "ActivatorType" : "LeakyRelu",
+    "Type" : "Standard",
+    "GradientAdjustmentParameters" : {
+      "Type" : "FixedLearningRate",
+      "LearningRate" : 0.1
+      }
+    // "GradientAdjustmentParameters" : {
+    //   "Type" : "Momentum",
+    //   "LearningRate" : 0.01,
+    //  "Momentum" : 0.01
+    //   }
+  } ]
+}
