@@ -44,9 +44,8 @@ public class NeuralNetwork {
      * of the function implemented by the network)
      * @return the output size
      */
-    public int getOutputSize()
-    {
-        throw new UnsupportedOperationException("not yet implemented");
+    public int getOutputSize() {
+        return layers.get(layers.size() - 1).getLayerSize();
     }
 
     /**
@@ -54,9 +53,9 @@ public class NeuralNetwork {
      * @param l
      * @return the current Neural Network. It allows to easily chain the addLayer calls
      */
-    public NeuralNetwork addLayer(AbstractLayer l)
-    {
-        throw new UnsupportedOperationException("not yet implemented");
+    public NeuralNetwork addLayer(AbstractLayer l) {
+        this.layers.add(l);
+        return this;
     }
 
     /** 
@@ -74,9 +73,8 @@ public class NeuralNetwork {
      * the activation of the last layer
      * @return the output
      */
-    public SimpleMatrix getOutput()
-    {
-        throw new UnsupportedOperationException("not yet implemented");
+    public SimpleMatrix getOutput() {
+        return layers.get(layers.size() - 1).getActivation();
     }
 
     /**
@@ -87,9 +85,13 @@ public class NeuralNetwork {
      * @return the output vectors. It is a m'xn matrix, where m' is the output dimension of the 
      *         correspondig function, and n the number of input vectors
      */
-    public SimpleMatrix propagate(SimpleMatrix input)
-    {
-        throw new UnsupportedOperationException("not yet implemented");
+    public SimpleMatrix propagate(SimpleMatrix input) {
+        SimpleMatrix currentInput = input;
+        for (AbstractLayer layer : this.layers) {
+            layer.propagate(currentInput);
+            currentInput = layer.getActivation();
+        }
+        return getOutput();
     }
 
     /**
@@ -97,14 +99,11 @@ public class NeuralNetwork {
      * This batch size must be propagated to every layers
      * @param batchSize the batch size
      */
-    public void setBatchSize(int batchSize)
-    {
-        self.batchSize=batchSize;
-        for(AbstractLayer l in self.layers){
+    public void setBatchSize(int batchSize) {
+        this.batchSize = batchSize;
+        for (AbstractLayer l : this.layers) {
             l.setBatchSize(batchSize);
-
         }
-     //   throw new UnsupportedOperationException("not yet implemented");
     }
 
     /**
@@ -203,10 +202,6 @@ public class NeuralNetwork {
 
         // to do : Initialize the NeuralNetwork net object with the elements provided by the neuralDTO 
         // loaded from the json file
-
-        neuralDTO.setBatchSize()
-
-
 
 
 
